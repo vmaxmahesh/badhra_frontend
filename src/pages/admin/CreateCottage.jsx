@@ -768,7 +768,7 @@ class CreateCottage extends Component {
 
     <div class="col-md-3">
             <div class="form-check">
-                <input className="form-check-input"   defaultChecked={this.state.checked} type="checkbox" c value={item.id} id="amenities" name="amenities_sel[]" onChange={this.chandleCheck}/>
+                <input className="form-check-input"   defaultChecked={this.state.checked} type="checkbox"  value={item.id} id="amenities" name="amenities_sel[]" onChange={this.chandleCheck}/>
                 <label class="form-check-label" for="flexCheckDefault" >
                 { item.amenity_name }
                 </label>
