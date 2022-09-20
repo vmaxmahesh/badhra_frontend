@@ -369,12 +369,31 @@ class EditRoom extends Component {
             this.state.amenityselArray.push(event.target.value);
         } else {
             
-          var myIndex = this.state.amenityselArray.indexOf(event.target.value);
-          if (myIndex !== -2) {
-            this.state.amenityselArray.splice(myIndex, 1);
-          }
+        //   var myIndex = this.state.amenityselArray.indexOf(event.target.value);
+        //   if (myIndex !== -2) {
+        //     this.state.amenityselArray.splice(myIndex, 1);
+        //   }
+
+
+
+        for (let i = 0; i < this.state.amenityselArray.length; i++) {
+            
+            if(this.state.amenityselArray[i] == event.target.value){
+
+                var myIndex=i;
+            }
+
+        }
+
+        this.state.amenityselArray.splice(myIndex, 1);
+
+
+
           
         }
+
+
+        console.log(this.state.amenityselArray);
     
         
         this.setState({
