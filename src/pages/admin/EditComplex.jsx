@@ -223,14 +223,27 @@ class EditComplex extends Component {
         
             this.state.amenityselArray.push(event.target.value);
         } else {
+
+
+            for (let i = 0; i < this.state.amenityselArray.length; i++) {
             
-          var myIndex = this.state.amenityselArray.indexOf(event.target.value);
-          if (myIndex !== -2) {
+                if(this.state.amenityselArray[i] == event.target.value){
+    
+                    var myIndex=i;
+                }
+    
+            }
+
             this.state.amenityselArray.splice(myIndex, 1);
-          }
+
+            
+        //   var myIndex = this.state.amenityselArray.indexOf(event.target.value);
+        //   if (myIndex !== -2) {
+        //     this.state.amenityselArray.splice(myIndex, 1);
+        //   }
           
         }   
-        // console.log(amenityselArray);
+        console.log(this.state.amenityselArray);
         this.setState({
             amenities_sel:this.state.amenityselArray
         });
