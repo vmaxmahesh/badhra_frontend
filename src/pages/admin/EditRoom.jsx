@@ -254,7 +254,10 @@ class EditRoom extends Component {
         })
 
 
-            this.getAmeniteis(this.state.hotel_id);
+        alert(e.target.value);
+
+
+            this.getAmeniteis(e.target.value);
         console.log(this.state.hotel_id)
 
     }
@@ -483,7 +486,7 @@ class EditRoom extends Component {
 
             this.state.selAmenities.map((item2, index2) => {
 
-                if (item2.amenity_id == item.id) {
+                if (item2.amenity_id === item.id) {
                     checked = 'true';
 
 
@@ -495,7 +498,7 @@ class EditRoom extends Component {
 
                 <div class="col-md-3">
                     <div class="form-check">
-                        <input class="form-check-input"  defaultChecked={checked} type="checkbox" defaultValue={item.id} id="amenities" name="amenities_sel[]" onChange={this.chandleCheck} />
+                        <input class="form-check-input"  defaultChecked={checked} type="checkbox" value={item.id} id="amenities" name="amenities_sel[]" onChange={this.chandleCheck} />
                         <label class="form-check-label" for="flexCheckDefault" >
                             {item.amenity_name}
                         </label>

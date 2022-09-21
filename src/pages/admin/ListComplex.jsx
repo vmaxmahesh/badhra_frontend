@@ -473,6 +473,7 @@ let cottagesList = this.state.cottagesList.map((item, index)=>{
                 return(
 
                     <p>{amt.amenity_name}</p>
+                    
 
                 );
         
@@ -557,7 +558,7 @@ return (
                             <th>Location</th>
                             <th>Latitude</th>
                             <th>Longitude</th>
-                            <th>Maximum number of Pax (Including Children age above 5 years)</th>
+                            <th>Max Pax for Single Occupancy (Including Children above 6 years)</th>
                             <th>Max Pax for Double Occupancy (Including Children above 6 years)</th>
                             <th>View Photos</th>
                             <th colspan="2">Actions</th>
