@@ -553,7 +553,7 @@ return (
                     <thead>
                         <tr className='table-danger'>
                             <th>Sno</th>
-                            <th>Name of cottage</th>
+                            <th>Name of Complex</th>
                             <th>Location</th>
                             <th>Latitude</th>
                             <th>Longitude</th>

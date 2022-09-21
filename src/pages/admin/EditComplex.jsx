@@ -416,6 +416,8 @@ class EditComplex extends Component {
                 
                 no_pax_error:error.response.data.errors.no_pax,
                 pax_double_error:error.response.data.errors.pax_double,
+                loaderClass:'',
+
                
     
             });
@@ -438,6 +440,12 @@ class EditComplex extends Component {
         });
     
         this.getPhotos(this.state.hotel_id);
+
+        this.setState({
+        })
+    
+
+
     
     
     }
