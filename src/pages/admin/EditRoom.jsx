@@ -254,7 +254,7 @@ class EditRoom extends Component {
         })
 
 
-        alert(e.target.value);
+        // alert(e.target.value);
 
 
             this.getAmeniteis(e.target.value);
