@@ -556,7 +556,7 @@ return (
                             <th>Name of cottage</th>
                             <th>Location</th>
                             <th>Latitude</th>
-                            <th>Langitude</th>
+                            <th>Longitude</th>
                             <th>Maximum number of Pax (Including Children age above 5 years)</th>
                             <th>Max Pax for Double Occupancy (Including Children above 6 years)</th>
                             <th>View Photos</th>

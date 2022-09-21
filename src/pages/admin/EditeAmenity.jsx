@@ -254,14 +254,14 @@ class EditeAmenity extends Component {
 
             if(error.response.data.errors){
                 this.setState({
-                    amenity_name_error:error.response.data.errors.amenity_name,
+                    amenity_name_error:error.response.data.errors[0].amenity_name,
                     hotel_type_id_error:error.response.data.errors.hotel_type_id,
                 });
                 
             }
             
             
-            console.log(error.response.data.errors.amenity_name);
+            console.log(error.response.data.errors[0].amenity_name);
             toast.error(error.response.data.message, {
                 position: "top-right",
                 autoClose: 5000,
