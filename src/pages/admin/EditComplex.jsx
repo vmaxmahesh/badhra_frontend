@@ -743,7 +743,7 @@ class EditComplex extends Component {
                 <div class="col-md-3">
                     <div class="mb-3 mt-3">
                             <label for=" " class="form-label">Name of cottage <span class="mandatory">*</span></label>
-                            <input type="text" class="form-control" id=" " placeholder="" defaultValue={this.state.hotel_name} name="hotel_name"  onInput={this.handleNameChange}  />
+                            <input type="text" class="form-control" id=" " placeholder="" defaultValue={this.state.hotel_name} name="hotel_name"  onChange={this.handleNameChange}  />
                             <span class="err text-danger">{ this.state.hotel_name_error }</span>
                     </div>
                 </div>
