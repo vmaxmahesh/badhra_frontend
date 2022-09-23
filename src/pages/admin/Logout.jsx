@@ -13,7 +13,7 @@ componentDidMount(){
 
   render() {
 
-    return <Navigate to="/login" />
+    return <Navigate to="/" />
 
 
     

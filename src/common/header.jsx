@@ -7,16 +7,47 @@ import axios from 'axios';
 
 class header extends Component {
 
+
+  
+ 
   
 
  render() {
 
+
+  let displayStyle = {
+    background:'#d68837',
+  };
   
+
+    // if(!localStorage.getItem('token')){
+
+    //   return <Navigate to={'/logout'} />
+    // }
 
     if(!localStorage.getItem('token')){
 
-      return <Navigate to={'/logout'} />
+
+      var activeId='hide';
+
+     
+
     }
+
+    else{
+
+      var activeId='';
+
+     
+
+    }
+
+    
+
+   
+    
+
+    
 
     return (
       <div>
@@ -31,7 +62,7 @@ class header extends Component {
               <div class="menu_head">
 		              Temple Accommodations 
 	            </div>
-              <div class=" d-flex justify-content-center" style={{ background:'#d68837'}}>
+              <div   id={activeId} style={displayStyle}>
     
     <nav class="navbar navbar-expand-sm">
         
@@ -40,7 +71,7 @@ class header extends Component {
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
      <i class="fas fa-bars"></i>
     </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">    
+                <div class="collapse navbar-collapse d-flex justify-content-center" id="collapsibleNavbar">    
                       <ul class="navbar-nav">
                       <li class="nav-item  ">
                          <Link to='/admin-dahsboard' class="nav-link  text-white " href=""><i class=""></i> Home</Link>

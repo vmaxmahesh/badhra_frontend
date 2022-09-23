@@ -1,0 +1,25 @@
+.btnss {
+    padding: 6px 15px;
+    background-color: #901509;
+    height: 36px;
+    border: 0px;
+    color: #FFF;
+    text-decoration: none;
+    margin-left: auto;
+    margin-top: 5px;
+}
+
+
+.btnhotelbooking {
+    font-size: 20px;
+    padding: 0.75em 1.5em;
+    background-color: #a71508;
+    border: 1px solid #bbb;
+    color: #FFF;
+    text-decoration: none;
+    display: inline;
+    cursor: pointer;
+    /* border-radius: 4px; */
+}
+
+

@@ -1,0 +1,11 @@
+.footer_div{
+    display:flex;
+    display:-webkit-flex;
+    flex-wrap:wrap;
+    -webkit-flex-wrap:wrap;
+    align-items:center;
+    -webkit-align-items:center;
+}
+.float-data2{
+    margin-left:auto;
+}

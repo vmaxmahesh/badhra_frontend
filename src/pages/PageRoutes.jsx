@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Routes,Route,Link } from 'react-router-dom';
+
+import Home from './Home';
 import Login from './Login';
 import Registration from './Registration';
 import Dashoard from './admin/dashoard';
@@ -24,7 +26,7 @@ class PageRoutes extends Component {
   render() {
     return (
       <Routes>
-        <Route exact path="/"  element={<Login/> }></Route>
+        <Route exact path="/"  element={<Home/> }></Route>
         <Route exact path="/login"  element={<Login/> }></Route>
         <Route exact path="/registration"  element={<Registration/> }></Route>
         <Route exact path="/admin-dahsboard" element={<Dashoard/>}></Route>
