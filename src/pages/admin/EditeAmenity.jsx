@@ -327,7 +327,7 @@ class EditeAmenity extends Component {
                 <div class="col-md-3">
                     <div class="mb-3 mt-3">
                             <label for=" " class="form-label">Applicable to <span class="mandatory">*</span></label>
-                            <select class="form-select" name="applicable_to" onChange={this.onTypeChange}>
+                            <select disabled class="form-select" name="applicable_to" onChange={this.onTypeChange}>
                                 <option value="">--Select Category--</option>
                                 { ctypes }
                             
