@@ -17,6 +17,7 @@ import EditComplex from './admin/EditComplex';
 import ListCottages from './admin/ListCottages';
 import ListComplex from './admin/ListComplex';
 import EditRoom from './admin/EditRoom';
+import AddAccommodation from './admin/AddAccommodation';
 
 
 class PageRoutes extends Component {
@@ -35,6 +36,10 @@ class PageRoutes extends Component {
         <Route exact path="/create-cottage" element={<CreateCottage/>}></Route>
         <Route exact path="/create-complex" element={<CreateComplex/>}></Route>
         <Route exact path="/add-room" element={<AddRoom/>}></Route>
+
+
+        <Route exact path="/book-acc" element={<AddAccommodation/>}></Route>
+
 
         <Route exact path="/edit-amenity/:id" element={  <EditeAmenity/> }></Route>
         <Route exact path="/edit-cottage/:id" element={  <EditCottage/> }></Route>
