@@ -234,19 +234,13 @@ export default class AddAccommodation extends Component {
 
         if(response.data.status_code == '200'){
 
-          console.log(response.data.message);
-
-
-           
-
-                console.log();
-
                 this.setState({
 
                   roomsList:response.data.RoomsList,
                   roomcount: response.data.roomscount,
                   start_date_error:'',
-                  bed_error:''
+                  bed_error:'',
+                  loaderClass:''
 
 
                 })
@@ -580,6 +574,15 @@ export default class AddAccommodation extends Component {
       <div>
 
         <Header />
+
+
+        <div>
+            <div class={this.state.loaderClass}>
+    
+                <div style={ this.state.loaderStyle } ></div>
+    
+            </div>
+        </div>
 
 
         <div class="">

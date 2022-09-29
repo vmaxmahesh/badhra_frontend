@@ -87,6 +87,9 @@ class header extends Component {
                               <li><Link to="/create-cottage" class="dropdown-item" href="#">Create a Cottage</Link></li>
                               <li><Link to="/create-complex" class="dropdown-item" href="#">Create a Complex</Link></li>
                               <li><Link to="/add-room" class="dropdown-item" href="#">Add rooms </Link></li>
+
+                              <li><Link to="/book-acc" class="dropdown-item" href="#">Search Booking </Link></li>
+
                             </ul>
                           </li>
                           <li class="nav-item  ">
