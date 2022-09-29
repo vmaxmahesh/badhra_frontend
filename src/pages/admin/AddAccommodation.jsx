@@ -4,6 +4,7 @@ import Footer from '../../common/footer';
 import '../../css/mystyle.css';
 import { parseISO, format } from 'date-fns';
 
+
 import '../../css/daterangepicker.css';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -233,18 +234,10 @@ export default class AddAccommodation extends Component {
 
         if(response.data.status_code == '200'){
 
-
-            toast.success(response.data.message, {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
+          console.log(response.data.message);
 
 
-                });
+           
 
                 console.log();
 
@@ -252,9 +245,24 @@ export default class AddAccommodation extends Component {
 
                   roomsList:response.data.RoomsList,
                   roomcount: response.data.roomscount,
+                  start_date_error:'',
+                  bed_error:''
 
 
                 })
+
+
+                toast.success(response.data.message, {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+  
+  
+                  });
 
 
              
@@ -488,6 +496,12 @@ export default class AddAccommodation extends Component {
               <td>{item.name}</td>
               <td>{item.location}</td>
               <td>{item.count}</td>
+              <td>
+
+              <button type="button" class="btn-success btn-sm">Book</button>
+
+
+              </td>
              
 
              
@@ -621,13 +635,13 @@ export default class AddAccommodation extends Component {
 
 
 
-                <div className="col-md-2">
+                {/* <div className="col-md-2">
                   <div className="mb-3 mt-3">
                     <label for=" " className="form-label">No of Rooms</label>
                     <div className="mydt pt-2 pb-2" >1</div>
                   </div>
 
-                </div>
+                </div> */}
 
 
 
@@ -686,13 +700,13 @@ export default class AddAccommodation extends Component {
 
                   </div>
                 </div>
-                <div className="col-md-3">
+                {/* <div className="col-md-3">
                   <div className="mb-3 mt-3">
                     <label for=" " className="form-label">No of Persons Allowed</label>
-                    {/* <!--<select  className="form-select" name="no_of_adults" id="no_of_adults"></select>--> */}
+                    <!--<select  className="form-select" name="no_of_adults" id="no_of_adults"></select>-->
                     <input type="text" id="no_of_adults" className="form-control" value="{{ $accupancy_adult_details[0]->adults_description }}" disabled />
                   </div>
-                </div>
+                </div> */}
 
                 <div className='col-md-2 submitbtn' >
                   <input type="submit" class="btn btn-danger " name="search" value="SEARCH" />
@@ -731,6 +745,7 @@ export default class AddAccommodation extends Component {
           </div>
         </div>
 
+        <ToastContainer />
 
 
         {/* <Footer /> */}
