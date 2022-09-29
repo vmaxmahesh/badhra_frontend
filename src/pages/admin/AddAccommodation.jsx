@@ -50,7 +50,8 @@ export default class AddAccommodation extends Component {
       roomsList:[],
       hotel_name:[],
       roomcount:0,
-
+      bed_error:'',
+      start_date_error:'',
       
 
       
@@ -82,46 +83,6 @@ export default class AddAccommodation extends Component {
 
 
 
-  getHotelName = () =>{
-
-    this.setState({
-        loaderClass:'loading',
-    })
-    
-
-    const data = {
-        token:localStorage.getItem("token"),
-        hotel_id:229,
-    }
-
-    const config={
-        headers: {
-            Authorization : `Bearer ${localStorage.getItem("token")}`
-            }
-    }
-
-    axios.post('/get-hotel-name',data,config).then((response)=>{
-        
-
-       
-        this.setState({
-
-            hotel_name:response.data.amenities,
-            
-            
-            
-        });
-
-
-
-    }).catch((error)=>{
-        alert(error);
-       
-        
-
-    });
-
-}
 
 
   chandleCheck = (event) => {
@@ -196,23 +157,49 @@ export default class AddAccommodation extends Component {
       data.append("amenity_sel[]", this.state.amenities_sel[i]);
     }
 
-    var s_date = this.state.start_date.toISOString();
-    s_date = s_date.substring(0, 10);
+    
 
-    var s_time= this.state.start_date.toLocaleTimeString('it-IT');
-    var data_start_date= s_date +' '+s_time;
+    var s_date = this.state.start_date;
 
-
-    var e_date = this.state.end_date.toISOString();
-    e_date = e_date.substring(0, 10);
-
-    var e_time= this.state.end_date.toLocaleTimeString('it-IT');
-    var data_end_date= s_date +' '+e_time;
+    if(s_date == ''){
+          var my_start_date = this.state.start_date;
+          var  s_time='';
 
 
-    data.append('bedTypeSel', this.state.bedTypeSel);
-    data.append('start_date', data_start_date);
-    data.append('end_date', data_end_date);
+    }
+    else{
+
+      var date1 = this.state.end_date.toISOString();
+      var my_start_date = date1.substring(0, 10);
+        var  s_time=this.state.end_date.toLocaleTimeString('it-IT');
+
+    }
+
+
+
+    var e_date = this.state.start_date;
+
+    if(e_date == ''){
+
+      var my_end_date = this.state.start_date;
+      var  e_time='';
+
+
+    }
+    else{
+
+         var date2 = this.state.end_date.toISOString();
+      var my_end_date = date2.substring(0, 10);
+        var  e_time=this.state.end_date.toLocaleTimeString('it-IT');
+
+
+    }
+
+
+
+    data.append('bedtype', this.state.bedTypeSel);
+    data.append('start_date', my_start_date +' '+s_time);
+    data.append('end_date', my_end_date +' '+e_time);
 
 
 
@@ -264,8 +251,7 @@ export default class AddAccommodation extends Component {
                 this.setState({
 
                   roomsList:response.data.RoomsList,
-                  
-                   roomcount: response.data.roomscount,
+                  roomcount: response.data.roomscount,
 
 
                 })
@@ -306,22 +292,18 @@ export default class AddAccommodation extends Component {
     }).catch((error)=>{
 
 
-        console.log(error);
+        console.log();
 
 
 
         this.setState({
 
-            hotel_name_error:error.response.data.errors.name,
-            ac_rooms_error:error.response.data.errors.bedrooms_ac,
-            non_ac_rooms_error:error.response.data.errors.bedrooms_nonac,
-            no_pax_error:error.response.data.errors.no_pax,
-            per_day_fare_error:error.response.data.errors.fare_per_day,
-            is_gst_applicable_error:error.response.data.errors.is_gst_applicable,
-            gst_percent_error:error.response.data.errors.gst_percent,
-            image_error:error.response.data.errors.images,
+          bed_error:error.response.data.errors.bedtype,
+          check_error:error.response.data.errors.accomdation,
+          start_date_error:error.response.data.errors.start_date,
+         
 
-        });
+      });
 
         toast.error(error.response.data.message, {
             position: "top-right",
@@ -615,20 +597,23 @@ export default class AddAccommodation extends Component {
                 <div className="col-md-12">
                   <div className="mb-3 mt-3">
                     <label for=" " className="form-label">Check In And Checkout Selection</label>
-                    {/* <DateRangePicker placeholder="Select Date Range"
-                      name="checkoutdates" defaultValue={[this.state.start_date, ]}  />
-
- */}
-
-
-<DateRangePicker
+                   
+ 
+<DateRangePicker  
       format="yyyy-MM-dd HH:mm:ss"
-      defaultCalendarValue={[this.state.start_date, this.state.end_date]}   onChange={this.hangleDateChange}
-    />
+      defaultCalendarValue={[this.state.start_date, this.state.end_date]}    onChange={this.hangleDateChange}
+    /> 
+    
+
+
 
 
                   </div>
+
                 </div>
+
+                <span class="err text-danger">{ this.state.start_date_error }</span>
+
 
 
               
@@ -692,11 +677,13 @@ export default class AddAccommodation extends Component {
                     <label for=" " className="form-label">Bed Type</label>
 
 
-                    <select class="form-select" name="category" onChange={(e) => { this.setState({ bedTypeSel: e.target.value }) }}>
+                    <select class="form-select" name="bedtype" onChange={(e) => { this.setState({ bedTypeSel: e.target.value }) }}>
                       <option value="">--Select --</option>
                       {bedTypes}
 
                     </select>
+                    <span class="err text-danger">{ this.state.bed_error }</span>
+
                   </div>
                 </div>
                 <div className="col-md-3">
