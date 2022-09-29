@@ -47,6 +47,9 @@ export default class AddAccommodation extends Component {
       bedTypeSel: '',
       start_date: '',
       end_date: '',
+      roomsList:[],
+      hotel_name:[],
+      roomcount:0,
 
       
 
@@ -62,6 +65,63 @@ export default class AddAccommodation extends Component {
     this.getAmeniteis();
     this.listBedTypes();
   }
+
+
+
+  stringToTimestamp(s) {
+    var t = s.match(/[\d\w]+/g);
+    var months = {jan:'01',feb:'02',mar:'03',apr:'04',may:'05',jun:'06',
+                  jul:'07',aug:'08',sep:'09',oct:'10',nov:'11',dec:'12'};
+    function pad(n){return (n<10?'0':'') + +n;}
+    var hrs = t[4] % 12;
+    hrs += /pm$/i.test(t[6])? 12 : 0;
+  
+    return t[3] + '-' + months[t[2].toLowerCase()] + '-' + pad(t[1]) + ' ' +
+           pad(hrs) + ':' + pad(t[5]);
+  }
+
+
+
+  getHotelName = () =>{
+
+    this.setState({
+        loaderClass:'loading',
+    })
+    
+
+    const data = {
+        token:localStorage.getItem("token"),
+        hotel_id:229,
+    }
+
+    const config={
+        headers: {
+            Authorization : `Bearer ${localStorage.getItem("token")}`
+            }
+    }
+
+    axios.post('/get-hotel-name',data,config).then((response)=>{
+        
+
+       
+        this.setState({
+
+            hotel_name:response.data.amenities,
+            
+            
+            
+        });
+
+
+
+    }).catch((error)=>{
+        alert(error);
+       
+        
+
+    });
+
+}
 
 
   chandleCheck = (event) => {
@@ -122,6 +182,7 @@ export default class AddAccommodation extends Component {
 
 
   formSubmit = (e) => {
+
     e.preventDefault();
 
 
@@ -135,13 +196,24 @@ export default class AddAccommodation extends Component {
       data.append("amenity_sel[]", this.state.amenities_sel[i]);
     }
 
+    var s_date = this.state.start_date.toISOString();
+    s_date = s_date.substring(0, 10);
+
+    var s_time= this.state.start_date.toLocaleTimeString('it-IT');
+    var data_start_date= s_date +' '+s_time;
+
+
+    var e_date = this.state.end_date.toISOString();
+    e_date = e_date.substring(0, 10);
+
+    var e_time= this.state.end_date.toLocaleTimeString('it-IT');
+    var data_end_date= s_date +' '+e_time;
 
 
     data.append('bedTypeSel', this.state.bedTypeSel);
-    data.append('start_date', this.state.start_date);
-    data.append('end_date', this.state.end_date);
+    data.append('start_date', data_start_date);
+    data.append('end_date', data_end_date);
 
-    console.log(this.state.start_date);
 
 
 
@@ -169,69 +241,37 @@ export default class AddAccommodation extends Component {
       }
     }
 
-    // axios.post('/create-cottage',data,config).then((response)=>{
+    axios.post('/search-room',data,config).then((response)=>{
 
 
-    //     if(response.data.status_code == '200'){
+        if(response.data.status_code == '200'){
 
 
-    //         toast.success(response.data.message, {
-    //             position: "top-right",
-    //             autoClose: 5000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
+            toast.success(response.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
 
 
-    //             });
+                });
 
-    //             this.setState({
+                console.log();
 
-    //                 hotel_name:'',
-    //                 location:'',
-    //                 latitude:'',
-    //                 langitude:'',
-    //                 non_ac_rooms:'',
-    //                 ac_rooms:'',
-    //                 no_pax:'',
-    //                 per_day_fare:'',
-    //                 gst_percent:'',
-    //                 is_gst_applicable:'',
-    //                 amenities_sel:[],
-    //                 hotel_name_error:'',
-    //                 ac_rooms_error:'',
-    //                 non_ac_rooms_error:'',
-    //                 no_pax_error:'',
-    //                 per_day_fare_error:'',
-    //                 is_gst_applicable_error:'',
-    //                 gst_percent_error:'',
-    //                 amenityselArray:[],
-    //                 image_error:'',
+                this.setState({
+
+                  roomsList:response.data.RoomsList,
+                  
+                   roomcount: response.data.roomscount,
 
 
-    //                 amenityselArray:[],
-    //                 // amenitieslist:[],
-    //                 total:'',
-    //                 photosSelected:[],
-    //                 photos:[],
-    //                 imagesArray:'',
-    //                 image:[]
+                })
 
 
-
-
-
-
-    //             })
-
-
-    //             this.listCottages();
-
-
-
-    //             this.unCheck();
+             
 
 
 
@@ -244,60 +284,67 @@ export default class AddAccommodation extends Component {
 
 
 
-    //     }else{
+        }else{
 
-    //         toast.error(response.data.message, {
-    //             position: "top-right",
-    //             autoClose: 5000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-
-
-    //             });
-
-    //     }
+            toast.error(response.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
 
 
+                });
 
-
-    // }).catch((error)=>{
-
-
-    //     console.log(error);
+        }
 
 
 
-    //     this.setState({
 
-    //         hotel_name_error:error.response.data.errors.name,
-    //         ac_rooms_error:error.response.data.errors.bedrooms_ac,
-    //         non_ac_rooms_error:error.response.data.errors.bedrooms_nonac,
-    //         no_pax_error:error.response.data.errors.no_pax,
-    //         per_day_fare_error:error.response.data.errors.fare_per_day,
-    //         is_gst_applicable_error:error.response.data.errors.is_gst_applicable,
-    //         gst_percent_error:error.response.data.errors.gst_percent,
-    //         image_error:error.response.data.errors.images,
-
-    //     });
-
-    //     toast.error(error.response.data.message, {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
+    }).catch((error)=>{
 
 
-    //         });
+        console.log(error);
 
-    // });
 
-    // this.listCottages();
+
+        this.setState({
+
+            hotel_name_error:error.response.data.errors.name,
+            ac_rooms_error:error.response.data.errors.bedrooms_ac,
+            non_ac_rooms_error:error.response.data.errors.bedrooms_nonac,
+            no_pax_error:error.response.data.errors.no_pax,
+            per_day_fare_error:error.response.data.errors.fare_per_day,
+            is_gst_applicable_error:error.response.data.errors.is_gst_applicable,
+            gst_percent_error:error.response.data.errors.gst_percent,
+            image_error:error.response.data.errors.images,
+
+        });
+
+        toast.error(error.response.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+
+
+            });
+
+    });
+
+
+    
+
+
+
+
+   
+
 
 
   }
@@ -447,6 +494,39 @@ export default class AddAccommodation extends Component {
 
   render() {
 
+    let roomsList = this.state.roomsList.map((item, index)=>{
+       let i=0;
+      
+
+      return (
+          <tr>
+
+
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.location}</td>
+              <td>{item.count}</td>
+             
+
+             
+              
+          </tr>
+
+  
+      );
+
+  });
+
+
+
+
+
+
+
+
+
+
+
 
 
     let bedTypes = this.state.bedTypes.map((item, index) => {
@@ -478,6 +558,24 @@ export default class AddAccommodation extends Component {
       );
 
     });
+
+
+
+
+    let rmlist = this.state.roomsList.map((item, index)=>{
+      return (
+
+  <div class="col-md-3">
+          <div class="form-check">
+              {/* <input className="form-check-input"   defaultChecked={this.state.checked} type="checkbox"  value={item.id} id="amenities" name="amenities_sel[]" onChange={this.chandleCheck}/> */}
+              <label class="form-check-label" for="flexCheckDefault" >
+              { item }
+              </label>
+          </div>
+  </div>
+      );
+
+  });
 
 
 
@@ -618,13 +716,37 @@ export default class AddAccommodation extends Component {
 
 
 
+            <div class="row">
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-bordered  table-responsive">
+                        <thead>
+                            <tr className='table-danger'>
+                                <th>Sno</th>
+                                <th>Name of Hotel</th>
+                                <th>Location</th>
+                                <th>No of rooms available</th>
+                        
+
+                                <th colspan="2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { roomsList }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+
 
           </div>
         </div>
 
 
 
-        <Footer />
+        {/* <Footer /> */}
 
 
       </div>
