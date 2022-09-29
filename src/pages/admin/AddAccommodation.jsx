@@ -286,6 +286,8 @@ export default class AddAccommodation extends Component {
 
                 });
 
+              
+
         }
 
 
@@ -303,7 +305,8 @@ export default class AddAccommodation extends Component {
           bed_error:error.response.data.errors.bedtype,
           check_error:error.response.data.errors.accomdation,
           start_date_error:error.response.data.errors.start_date,
-         
+          loaderClass:'',
+
 
       });
 
